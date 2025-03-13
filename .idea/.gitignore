@@ -1,0 +1,57 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# 컴파일된 파일
+target/
+*.jar
+*.war
+*.ear
+
+# IDE 설정 파일
+.idea/
+*.iml
+*.iws
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS별 임시 파일
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+logs/
+*.log
+!src/main/resources/*.log
+
+# 환경 설정 파일
+.env
+*.env
+*.properties
+!src/main/resources/application.properties
+!src/main/resources/application.yml
+!src/main/resources/application.yaml
+
+# Maven, Gradle 빌드 관련 파일
+mvnw
+mvnw.cmd
+.gradle/
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Lombok 캐시 파일
+.lombok/
+
+# IntelliJ, Eclipse, NetBeans 설정 파일
+.classpath
+.project
+.settings/
+*.factorypath
+
+# Docker 관련 파일
+docker-compose.override.yml
