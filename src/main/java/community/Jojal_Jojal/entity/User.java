@@ -1,29 +1,33 @@
 package community.Jojal_Jojal.entity;
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="user")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long id;
 
-    @Column(nullable = false,length = 100)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 10)
     private String nickname;
 
-    @Column(nullable = true,length = 255)
-    private String profile_image;
+    private String profileImageUrl;
 
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime deletedAt;
 }

@@ -1,6 +1,8 @@
 package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.request.UserUpdateRequest;
 import community.Jojal_Jojal.dto.response.UserUpdateResponse;
+import community.Jojal_Jojal.dto.user.UserRequestDto;
+import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.service.UserService;
 import jakarta.validation.Valid;
@@ -10,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
@@ -19,6 +21,12 @@ public class UserController {
     }
 
     /** 회원가입 */
+    @PostMapping("")
+    public ResponseEntity<UserResponseDto.RegisterResponse> registerUser(@RequestBody @Valid UserRequestDto.Register request) {
+        User user = userService.registerUser(request);
+        return ResponseEntity.ok(new UserResponseDto.RegisterResponse(user));
+    }
+
     /** 로그인 */
     /** 토큰 발급 */
 
@@ -39,6 +47,7 @@ public class UserController {
     }
 
     /** 유저 비밀번호 수정 */
+
 
     /** 회원 탈퇴 */
 

@@ -28,17 +28,17 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    @Transactional
-    public Post updatePost(Long id, Post postDetails) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
-        post.setTitle(postDetails.getTitle());
-        post.setContent(postDetails.getContent());
-        return postRepository.save(post);
-    }
+//    @Transactional
+//    public Post updatePost(Long id, Post postDetails) {
+//        Post post = postRepository.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+//        post.setTitle(postDetails.getTitle());
+//        post.setContent(postDetails.getContent());
+//        return postRepository.save(post);
+//    }
 
-    @Transactional
-    public void deletePost(Long id) {
-        postRepository.deleteById(id);
-    }
+//    @Transactional
+//    public void deletePost(Long id) {
+//        postRepository.deleteById(id);
+//    }
 }
