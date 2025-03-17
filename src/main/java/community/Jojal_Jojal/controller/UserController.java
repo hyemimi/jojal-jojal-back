@@ -1,6 +1,4 @@
 package community.Jojal_Jojal.controller;
-import community.Jojal_Jojal.dto.request.UserUpdateRequest;
-import community.Jojal_Jojal.dto.response.UserUpdateResponse;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
 import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
@@ -32,19 +30,22 @@ public class UserController {
 
     /** 특정 유저 조회 */
     @GetMapping("/{user_id}")
-    public ResponseEntity<User> getUserById(@PathVariable("user_id") Long user_id) {
-        Optional<User> user = userService.getUserById(user_id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<UserResponseDto.UserDetail> getUserById(@PathVariable("user_id") Long userId) {
+
+        return userService.getUserById(userId)
+                .map(user -> ResponseEntity.ok(new UserResponseDto.UserDetail(user))) //
+                .orElseGet(() -> ResponseEntity.notFound().build()); // 404
     }
 
+
     /** 유저 정보 수정 */
-    @PatchMapping("/{user_id}")
-    public ResponseEntity<UserUpdateResponse> updateUser(
-            @PathVariable("user_id") Long user_id,
-            @RequestBody @Valid UserUpdateRequest request
-    ) {
-        return ResponseEntity.ok(userService.updateUser(user_id, request));
-    }
+//    @PatchMapping("/{user_id}")
+//    public ResponseEntity<UserUpdateResponse> updateUser(
+//            @PathVariable("user_id") Long user_id,
+//            @RequestBody @Valid UserUpdateRequest request
+//    ) {
+//        return ResponseEntity.ok(userService.updateUser(user_id, request));
+//    }
 
     /** 유저 비밀번호 수정 */
 
