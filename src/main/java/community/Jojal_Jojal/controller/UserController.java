@@ -39,13 +39,15 @@ public class UserController {
 
 
     /** 유저 정보 수정 */
-//    @PatchMapping("/{user_id}")
-//    public ResponseEntity<UserUpdateResponse> updateUser(
-//            @PathVariable("user_id") Long user_id,
-//            @RequestBody @Valid UserUpdateRequest request
-//    ) {
-//        return ResponseEntity.ok(userService.updateUser(user_id, request));
-//    }
+   @PatchMapping("/{user_id}")
+    public ResponseEntity<UserResponseDto.EditUserDetail> updateUser(
+            @PathVariable("user_id") Long user_id,
+           @RequestBody @Valid UserRequestDto.EditProfile request
+    ) {
+       User user = userService.updateUser(user_id, request);
+
+       return ResponseEntity.ok(new UserResponseDto.EditUserDetail(user));
+   }
 
     /** 유저 비밀번호 수정 */
 

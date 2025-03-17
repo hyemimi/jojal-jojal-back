@@ -40,16 +40,16 @@ public class UserService {
     public Optional<User> getUserById(Long user_id) {return userRepository.findById(user_id);}
 
     /** 유저 정보 수정 */
-//    @Transactional
-//    public UserUpdateResponse updateUser(Long user_id, UserUpdateRequest request) {
-//        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
-//        user.setNickname(request.getNickname()); // null 허용 X
-//        user.setProfileImageUrl(request.getProfile_image()); // null 허용
-//
-//        userRepository.save(user);
-//
-//        return new UserUpdateResponse(user);
-//    }
+   @Transactional
+    public User updateUser(Long user_id, UserRequestDto.EditProfile request) {
+        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
+        user.setNickname(request.getNickname()); // null 허용 X
+        user.setProfileImageUrl(request.getProfileImageUrl()); // null 허용
+        userRepository.save(user);
+
+        return user;
+    }
 
     /** 유저 비밀번호 수정 */
 
