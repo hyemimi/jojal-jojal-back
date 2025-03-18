@@ -36,6 +36,7 @@ public class Post {
     private int viewsCount = 0;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt;

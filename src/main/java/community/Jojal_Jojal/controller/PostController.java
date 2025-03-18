@@ -1,6 +1,9 @@
 package community.Jojal_Jojal.controller;
+import community.Jojal_Jojal.dto.post.PostRequestDto;
+import community.Jojal_Jojal.dto.post.PostResponseDto;
 import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
 
@@ -16,24 +19,28 @@ public class PostController {
         this.postService = postService;
     }
 
-    // 게시글 전체 조회
-//    @GetMapping
-//    public ResponseEntity<List<Post>> getAllPosts() {
-//        return ResponseEntity.ok(postService.getAllPosts());
-//    }
+    // 게시글 생성
+    @PostMapping("")
+    public ResponseEntity<Void> uploadPost(@RequestBody @Valid PostRequestDto.uploadPost postDetails) {
+        postService.uploadPost(postDetails);
+
+        return ResponseEntity.noContent().build();
+    }
+
+     // 게시글 전체 조회
+    @GetMapping
+    public ResponseEntity<List<PostResponseDto.getAllPostsResponse>> getAllPosts() {
+        return ResponseEntity.ok(postService.getAllPosts());
+    }
+
+    // 게시글 단일 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
+        Optional<Post> post = postService.getPostById(id);
+        return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 //
-//    // 게시글 단일 조회
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
-//        Optional<Post> post = postService.getPostById(id);
-//        return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    // 게시글 생성
-//    @PostMapping
-//    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-//        return ResponseEntity.ok(postService.createPost(post));
-//    }
+
 //
 //    // 게시글 수정
 //    @PutMapping("/{id}")

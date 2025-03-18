@@ -4,7 +4,6 @@ import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +51,25 @@ public class UserService {
     }
 
     /** 유저 비밀번호 수정 */
+    @Transactional
+    public User updatePassword(Long user_id, UserRequestDto.EditPassword request) {
+        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
-    /** 회원 탈퇴 */
+        user.setPassword(request.getPassword());
+        userRepository.save(user);
+
+        return user;
+    }
+
+//    /** 회원 탈퇴 */
+//    @Transactional
+//    public User deleteUser(Long user_id) {
+//        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+//
+//       // user.setDeletedAt();
+//        userRepository.save(user);
+//
+//        return user;
+//    }
 
 }
