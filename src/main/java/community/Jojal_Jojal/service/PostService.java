@@ -26,7 +26,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    /** 게시물 조회 */
+    /** 게시물 전체 조회 */
     public List<PostResponseDto.getAllPostsResponse> getAllPosts() {
         return postRepository.findAll()
                 .stream()// 리스트 -> 스트림 변환
@@ -38,7 +38,7 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    /** 게시물 쓰기 */
+    /** 게시물 생성 */
     @Transactional
     public Post uploadPost(PostRequestDto.uploadPost postDetails) {
         Post post = Post.builder()

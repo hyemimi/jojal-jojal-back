@@ -1,6 +1,7 @@
 package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.post.PostRequestDto;
 import community.Jojal_Jojal.dto.post.PostResponseDto;
+import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.service.PostService;
 import jakarta.validation.Valid;
@@ -34,10 +35,11 @@ public class PostController {
     }
 
     // 게시글 단일 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
-        Optional<Post> post = postService.getPostById(id);
-        return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{post_id}")
+    public ResponseEntity<PostResponseDto.getPostResponse> getPostById(@PathVariable("post_id") Long id) {
+
+        return  postService.getPostById(id).map(post ->ResponseEntity.ok(new PostResponseDto.getPostResponse(post))).orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 //
 
