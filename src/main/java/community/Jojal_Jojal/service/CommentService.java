@@ -1,12 +1,17 @@
 package community.Jojal_Jojal.service;
 
 import community.Jojal_Jojal.dto.comment.CommentRequestDto;
+import community.Jojal_Jojal.dto.comment.CommentResponseDto;
+import community.Jojal_Jojal.dto.post.PostResponseDto;
 import community.Jojal_Jojal.entity.Comment;
 import community.Jojal_Jojal.repository.CommentRepository;
 import community.Jojal_Jojal.repository.PostRepository;
 import community.Jojal_Jojal.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -34,4 +39,11 @@ public class CommentService {
         return;
 
     }
+
+    /** 댓글 조회 */
+    public List<CommentResponseDto.getComments> getComments (Long id) {
+        return commentRepository.findAll().stream().map(comment -> new CommentResponseDto.getComments(comment)).collect(Collectors.toList());
+    }
+
+
 }
