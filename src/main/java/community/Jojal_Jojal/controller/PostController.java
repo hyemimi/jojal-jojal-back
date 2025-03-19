@@ -1,15 +1,12 @@
 package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.post.PostRequestDto;
 import community.Jojal_Jojal.dto.post.PostResponseDto;
-import community.Jojal_Jojal.dto.user.UserResponseDto;
-import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
@@ -44,11 +41,13 @@ public class PostController {
 //
 
 //
-//    // 게시글 수정
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
-//        return ResponseEntity.ok(postService.updatePost(id, postDetails));
-//    }
+    // 게시글 수정
+    @PatchMapping("/{post_id}")
+    public ResponseEntity<Void> updatePost(@PathVariable("post_id") Long post_id, @RequestBody PostRequestDto.editPost editDetails) {
+        postService.updatePost(post_id, editDetails);
+
+        return ResponseEntity.noContent().build();
+    }
 //
     // 게시글 삭제
     @DeleteMapping("/{post_id}")

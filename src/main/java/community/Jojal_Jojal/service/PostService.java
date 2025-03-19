@@ -56,4 +56,16 @@ public class PostService {
     public void deletePost(Long id) {
         postRepository.deleteById(id);
     }
+
+    /** 게시물 편집  */
+    @Transactional
+    public void updatePost(Long id, PostRequestDto.editPost editDetails) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+        post.setTitle(editDetails.getTitle());
+        post.setPost_content(editDetails.getPost_content());
+        post.setPost_image_url(editDetails.getPost_image_url());
+        postRepository.save(post);
+
+        return;
+    }
 }

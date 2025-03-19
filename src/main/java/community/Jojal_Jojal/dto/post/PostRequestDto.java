@@ -19,6 +19,17 @@ public class PostRequestDto {
 
       @NotNull
       private Long user_id;
+    }
+
+    @Getter @Setter
+    public static class editPost {
+        @NotBlank
+        private String title;
+
+        private String post_image_url;
+
+        @NotBlank
+        private String post_content;
 
     }
 }

@@ -2,13 +2,10 @@ package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
 import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
-import community.Jojal_Jojal.service.PostService;
 import community.Jojal_Jojal.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")

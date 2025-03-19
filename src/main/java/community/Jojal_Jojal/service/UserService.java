@@ -1,6 +1,5 @@
 package community.Jojal_Jojal.service;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
-import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
