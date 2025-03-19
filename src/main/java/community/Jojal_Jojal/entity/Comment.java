@@ -26,6 +26,7 @@ public class Comment {
     private String comment_content;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime created_at = LocalDateTime.now();
 
     private LocalDateTime updated_at;
