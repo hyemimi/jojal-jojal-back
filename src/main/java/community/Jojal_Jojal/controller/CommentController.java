@@ -32,4 +32,12 @@ public class CommentController {
     public ResponseEntity<List<CommentResponseDto.getComments>> uploadComment (@PathVariable("post_id") Long id) {
         return ResponseEntity.ok(commentService.getComments(id));
     }
+
+    /** 댓글 삭제 */
+    @DeleteMapping("/{post_id}/comment/{comment_id}")
+    public ResponseEntity<Void> deleteComment (@PathVariable("comment_id") Long comment_id) {
+
+        commentService.deleteComment(comment_id);
+        return ResponseEntity.noContent().build();
+    }
 }
