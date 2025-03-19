@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,19 +27,23 @@ public class Post {
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String postContent;
+    private String post_content;
 
-    private String postImageUrl;
-
-    @Column(nullable = false)
-    private int likeCount = 0;
+    private String post_image_url;
 
     @Column(nullable = false)
-    private int viewsCount = 0;
+    private int like_count = 0;
+
+    @Column(nullable = false)
+    private int views_Count = 0;
 
     @Column(nullable = false, updatable = false)
     @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
+
+    // 양방향 관계 설정 (1:N)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 }

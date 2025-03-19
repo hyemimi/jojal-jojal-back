@@ -15,7 +15,7 @@ public class Comment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", nullable = false) // FK 설정
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,11 +23,11 @@ public class Comment {
     private User user;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String commentContent;
+    private String comment_content;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 }
 

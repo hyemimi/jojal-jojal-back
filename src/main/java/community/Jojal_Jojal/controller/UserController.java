@@ -2,6 +2,7 @@ package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
 import community.Jojal_Jojal.dto.user.UserResponseDto;
 import community.Jojal_Jojal.entity.User;
+import community.Jojal_Jojal.service.PostService;
 import community.Jojal_Jojal.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,11 @@ public class UserController {
 
 
     /** 회원 탈퇴 */
+    @DeleteMapping("/{user_id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("user_id") Long user_id){
+        userService.deleteUser(user_id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

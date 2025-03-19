@@ -50,10 +50,10 @@ public class PostController {
 //        return ResponseEntity.ok(postService.updatePost(id, postDetails));
 //    }
 //
-//    // 게시글 삭제
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-//        postService.deletePost(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    // 게시글 삭제
+    @DeleteMapping("/{post_id}")
+    public ResponseEntity<Void> deletePost(@PathVariable("post_id") Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.noContent().build();
+    }
 }

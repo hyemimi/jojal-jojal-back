@@ -24,7 +24,7 @@ public class UserService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .nickname(request.getNickname())
-                .profileImageUrl(request.getProfileImageUrl())
+                .profile_image_url(request.getProfile_image_url())
                 .build();
        userRepository.save(user);
 
@@ -44,7 +44,7 @@ public class UserService {
         User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
         user.setNickname(request.getNickname()); // null 허용 X
-        user.setProfileImageUrl(request.getProfileImageUrl()); // null 허용
+        user.setProfile_image_url(request.getProfile_image_url()); // null 허용
         userRepository.save(user);
 
         return user;
@@ -61,15 +61,15 @@ public class UserService {
         return user;
     }
 
-//    /** 회원 탈퇴 */
-//    @Transactional
-//    public User deleteUser(Long user_id) {
-//        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
-//
-//       // user.setDeletedAt();
-//        userRepository.save(user);
-//
-//        return user;
-//    }
+    /** 회원 탈퇴 */
+    @Transactional
+    public User deleteUser(Long user_id) {
+        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
+       // user.setDeletedAt();
+        userRepository.delete(user);
+
+        return user;
+    }
 
 }

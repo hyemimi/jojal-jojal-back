@@ -45,14 +45,15 @@ public class PostService {
                 .user(userRepository.findById(postDetails.getUser_id())
                         .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다.")))
                 .title(postDetails.getTitle())
-                .postImageUrl(postDetails.getPost_image_url())
-                .postContent(postDetails.getPost_content())
+                .post_image_url(postDetails.getPost_image_url())
+                .post_content(postDetails.getPost_content())
                 .build();
         return postRepository.save(post);
     }
 
-//    @Transactional
-//    public void deletePost(Long id) {
-//        postRepository.deleteById(id);
-//    }
+    /** 게시글 삭제 */
+    @Transactional
+    public void deletePost(Long id) {
+        postRepository.deleteById(id);
+    }
 }

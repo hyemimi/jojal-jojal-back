@@ -27,7 +27,7 @@ public class UserResponseDto {
         public LoginResponse(User user) {
             this.userId = user.getId();
             this.nickname = user.getNickname();
-            this.profileImageUrl = user.getProfileImageUrl();
+            this.profileImageUrl = user.getProfile_image_url();
         }
     }
 
@@ -41,7 +41,7 @@ public class UserResponseDto {
         public UserDetail(User user) {
             this.email = user.getEmail();
             this.nickname = user.getNickname();
-            this.profileImageUrl = user.getProfileImageUrl();
+            this.profileImageUrl = user.getProfile_image_url();
         }
     }
 
@@ -54,7 +54,7 @@ public class UserResponseDto {
 
         public EditUserDetail(User user) {
             this.nickname = user.getNickname();
-            this.profileImageUrl = user.getProfileImageUrl();
+            this.profileImageUrl = user.getProfile_image_url();
         }
     }
 

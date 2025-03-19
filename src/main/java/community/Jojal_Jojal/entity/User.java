@@ -2,6 +2,8 @@ package community.Jojal_Jojal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,11 +25,18 @@ public class User {
     @Column(nullable = false, length = 10, unique = true)
     private String nickname;
 
-    private String profileImageUrl;
+    private String profile_image_url;
 
     @Column(nullable = false, updatable = false)
     @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    private LocalDateTime deletedAt;
+    private LocalDateTime deleted_at;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
 }
