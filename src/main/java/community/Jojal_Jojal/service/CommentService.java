@@ -54,5 +54,14 @@ public class CommentService {
         return;
     }
 
+    /** 댓글 수정 */
+    public void updateComment(Long id, CommentRequestDto.updateComment commentDetail) {
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없어 수정할 수 없습니다"));
+        comment.setComment_content(commentDetail.getComment_content());
+        commentRepository.save(comment);
+
+        return;
+    }
+
 
 }

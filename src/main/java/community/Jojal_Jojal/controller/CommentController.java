@@ -40,4 +40,11 @@ public class CommentController {
         commentService.deleteComment(comment_id);
         return ResponseEntity.noContent().build();
     }
+
+    /** 댓글 수정 */
+    @PatchMapping("/{post_id}/comment/{comment_id}")
+    public ResponseEntity<Void> updateComment (@PathVariable("comment_id") Long id, @RequestBody @Valid CommentRequestDto.updateComment commentDetail) {
+        commentService.updateComment(id, commentDetail);
+        return ResponseEntity.noContent().build();
+    }
 }

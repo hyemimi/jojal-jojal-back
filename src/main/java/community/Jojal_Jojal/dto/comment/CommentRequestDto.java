@@ -10,6 +10,7 @@ import java.awt.font.TextAttribute;
 
 public class CommentRequestDto {
 
+    /** 댓글 작성 */
     @Getter
     @Setter
     public static class uploadComment {
@@ -23,5 +24,14 @@ public class CommentRequestDto {
         @NotBlank
         private String comment_content;
 
+    }
+
+    /** 댓글 수정 */
+    @Getter
+    @Setter
+    public static class updateComment {
+
+        @NotBlank
+        private String comment_content;
     }
 }
