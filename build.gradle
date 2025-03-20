@@ -24,6 +24,7 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.33")  // MySQL 드라이버
 	implementation 'org.springframework.boot:spring-boot-starter-security' // spring security
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	compileOnly("org.projectlombok:lombok:1.18.30")
