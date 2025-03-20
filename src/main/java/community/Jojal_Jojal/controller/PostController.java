@@ -72,4 +72,15 @@ public class PostController {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }
+
+    // 좋아요 추가
+    @PostMapping("/{post_id}/heart")
+    @Operation(summary = "좋아요 추가", description = "좋아요를 추가합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "성공적으로 추가됨")
+    })
+    public ResponseEntity<Void> updateHeart(@PathVariable("post_id") Long id) {
+        postService.updateHeart(id);
+        return ResponseEntity.noContent().build();
+    }
 }
