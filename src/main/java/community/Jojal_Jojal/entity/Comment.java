@@ -30,5 +30,9 @@ public class Comment {
     private LocalDateTime created_at = LocalDateTime.now();
 
     private LocalDateTime updated_at;
+    @PreUpdate
+    public void preUpdate() {
+        this.updated_at = LocalDateTime.now();
+    }
 }
 

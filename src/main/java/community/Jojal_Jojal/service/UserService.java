@@ -66,7 +66,8 @@ public class UserService {
         User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
        // user.setDeletedAt();
-        userRepository.delete(user);
+        user.softDelete();
+        userRepository.save(user);
 
         return user;
     }

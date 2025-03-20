@@ -32,6 +32,15 @@ public class User {
     private LocalDateTime created_at = LocalDateTime.now();
 
     private LocalDateTime deleted_at;
+    /** 소프트 딜리트 실행 */
+    public void softDelete() {
+        this.deleted_at = LocalDateTime.now();
+    }
+
+    /** 소프트 딜리트 복구 */
+    public void restore() {
+        this.deleted_at = null;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();

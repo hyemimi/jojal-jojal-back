@@ -40,6 +40,10 @@ public class Post {
     private LocalDateTime created_at = LocalDateTime.now();
 
     private LocalDateTime updated_at;
+    @PreUpdate
+    public void preUpdate() {
+        this.updated_at = LocalDateTime.now();
+    }
 
     // 양방향 관계 설정 (1:N)
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
