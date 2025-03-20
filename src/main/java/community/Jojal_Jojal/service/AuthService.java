@@ -1,9 +1,10 @@
 package community.Jojal_Jojal.service;
 
 import community.Jojal_Jojal.dto.auth.AuthRequestDto;
-import community.Jojal_Jojal.dto.auth.AuthResponseDto;
 import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,21 +22,22 @@ public class AuthService {
     }
 
     /**로그인*/
-    public User loginUser (AuthRequestDto.loginUser userDetail) {
-
+    public ResponseEntity loginUser (AuthRequestDto.loginUser userDetail) {
         Optional<User> userOptional = userRepository.findByEmail(userDetail.getEmail());
 
+        // 이메일이 존재하지 않는 경우 : 401 Unauthorized 반환
         if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("이메일이 존재하지 않습니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         User user = userOptional.get();
-        // 비밀번호 검증 (해시 비교)
+
+        // 비밀번호가 틀린 경우 : 401 Unauthorized 반환
         if (!passwordEncoder.matches(userDetail.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        // 로그인 성공 시 사용자 정보 반환
-        return user;
+        // 로그인 성공 시 200
+        return ResponseEntity.ok(user);
     }
 }
