@@ -27,7 +27,8 @@ public class UserController {
         return ResponseEntity.ok(new UserResponseDto.RegisterResponse(user));
     }
 
-    /** 로그인 */
+
+
     /** 토큰 발급 */
 
     /** 특정 유저 조회 */
