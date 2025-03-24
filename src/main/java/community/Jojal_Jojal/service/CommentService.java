@@ -42,7 +42,10 @@ public class CommentService {
 
     /** 댓글 조회 */
     public List<CommentResponseDto.getComments> getComments (Long id) {
-        return commentRepository.findAll().stream().map(comment -> new CommentResponseDto.getComments(comment)).collect(Collectors.toList());
+        return commentRepository.findByPostId(id)
+                .stream()
+                .map(CommentResponseDto.getComments::new)
+                .collect(Collectors.toList());
     }
 
     /** 댓글 삭제 */
