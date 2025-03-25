@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,8 +26,10 @@ public class UserController {
     /** 회원가입 */
     @Operation(summary = "회원가입")
     @PostMapping("")
-    public ResponseEntity<UserResponseDto.RegisterResponse> registerUser(@RequestBody @Valid UserRequestDto.Register request) {
-        User user = userService.registerUser(request);
+    public ResponseEntity<UserResponseDto.RegisterResponse> registerUser(
+            @ModelAttribute UserRequestDto.Register request, // form-data 필드 직접 매핑
+            @RequestPart(value = "profile_image_url", required = false) MultipartFile profile_image_url)  {
+        User user = userService.registerUser(request,profile_image_url);
         return ResponseEntity.ok(new UserResponseDto.RegisterResponse(user));
     }
 
