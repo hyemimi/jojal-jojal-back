@@ -1,4 +1,5 @@
 package community.Jojal_Jojal.dto.user;
+import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.entity.User;
 import lombok.Getter;
 
@@ -58,5 +59,15 @@ public class UserResponseDto {
         }
     }
 
+    @Getter
+    public static class getUserPosts {
+        private String title;
+        private String post_content;
+
+        public getUserPosts(Post post) {
+            this.title = post.getTitle();
+            this.post_content = post.getPost_content();
+        }
+    }
 
 }

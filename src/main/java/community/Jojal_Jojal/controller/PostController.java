@@ -1,6 +1,7 @@
 package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.post.PostRequestDto;
 import community.Jojal_Jojal.dto.post.PostResponseDto;
+import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -94,5 +95,7 @@ public class PostController {
         postService.deleteHeart(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 }

@@ -1,19 +1,26 @@
 package community.Jojal_Jojal.service;
+import community.Jojal_Jojal.dto.post.PostResponseDto;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
+import community.Jojal_Jojal.dto.user.UserResponseDto;
+import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.entity.User;
+import community.Jojal_Jojal.repository.PostRepository;
 import community.Jojal_Jojal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -71,5 +78,19 @@ public class UserService {
 
         return user;
     }
+
+    /** 유저가 작성한 게시글 조회 */
+    @Transactional
+    public List<UserResponseDto.getUserPosts> getUserPosts(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저"));
+
+        return user.getPosts().stream()
+                .map(post -> new UserResponseDto.getUserPosts(
+                     post
+                ))
+                .collect(Collectors.toList());
+    }
+
 
 }

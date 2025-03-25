@@ -2,6 +2,7 @@ package community.Jojal_Jojal.service;
 import community.Jojal_Jojal.dto.post.PostRequestDto;
 import community.Jojal_Jojal.dto.post.PostResponseDto;
 import community.Jojal_Jojal.entity.Post;
+import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.repository.PostRepository;
 import community.Jojal_Jojal.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,8 @@ public class PostService {
 
         return;
     }
+
+    /** 좋아요 삭제 */
     @Transactional
     public void deleteHeart(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
@@ -88,4 +91,8 @@ public class PostService {
         postRepository.save(post);
         return;
     }
+
+
+
+
 }

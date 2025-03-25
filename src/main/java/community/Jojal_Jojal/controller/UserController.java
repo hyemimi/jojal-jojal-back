@@ -1,6 +1,7 @@
 package community.Jojal_Jojal.controller;
 import community.Jojal_Jojal.dto.user.UserRequestDto;
 import community.Jojal_Jojal.dto.user.UserResponseDto;
+import community.Jojal_Jojal.entity.Post;
 import community.Jojal_Jojal.entity.User;
 import community.Jojal_Jojal.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -63,6 +66,13 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable("user_id") Long user_id){
         userService.deleteUser(user_id);
         return ResponseEntity.noContent().build();
+    }
+
+    /** 유저가 작성한 게시글 조회 */
+    @GetMapping("/{user_id}/posts")
+    @Operation(summary = "유저 작성 게시글 조회", description = "유저가 작성한 게시글을 조회합니다.")
+    public ResponseEntity<List<UserResponseDto.getUserPosts>> getUserPosts(@PathVariable("user_id") Long id) {
+        return ResponseEntity.ok(userService.getUserPosts(id));
     }
 
 

@@ -15,7 +15,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true); // 쿠키 허용
-        config.setAllowedOrigins(List.of("http://127.0.0.1:5500")); // 허용할 프론트엔드 주소
+        config.setAllowedOrigins(List.of("http://localhost:5173")); // 허용할 프론트엔드 주소
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")); // 허용할 HTTP 메서드
         config.setAllowedHeaders(List.of("Authorization", "Content-Type")); // 허용할 헤더
 
