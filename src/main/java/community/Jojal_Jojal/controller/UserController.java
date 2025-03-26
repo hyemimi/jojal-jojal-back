@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,9 +54,9 @@ public class UserController {
    @PatchMapping("/{user_id}")
     public ResponseEntity<UserResponseDto.EditUserDetail> updateUser(
             @PathVariable("user_id") Long user_id,
-           @RequestBody @Valid UserRequestDto.EditProfile request
-    ) {
-       User user = userService.updateUser(user_id, request);
+            UserRequestDto.EditProfile request,
+            @RequestPart(value="profile_image_url", required=false) MultipartFile profile_image_url) {
+       User user = userService.updateUser(user_id, request,profile_image_url);
 
        return ResponseEntity.ok(new UserResponseDto.EditUserDetail(user));
    }

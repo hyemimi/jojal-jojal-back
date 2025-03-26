@@ -58,11 +58,20 @@ public class UserService {
 
     /** 유저 정보 수정 */
    @Transactional
-    public User updateUser(Long user_id, UserRequestDto.EditProfile request) {
+    public User updateUser(Long user_id, UserRequestDto.EditProfile request, MultipartFile profile_image_url) {
         User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
         user.setNickname(request.getNickname()); // null 허용 X
-        //user.setProfile_image_url(request.getProfile_image_url()); // null 허용
+
+       if (profile_image_url != null && !profile_image_url.isEmpty()) {
+           try {
+               String imageUrl = s3Uploader.upload(profile_image_url, "profile-images");
+               user.setProfile_image_url(imageUrl); // 기존 이미지 덮어쓰기
+           } catch (IOException e) {
+               throw new RuntimeException("프로필 이미지 업로드 실패", e);
+           }
+       }
+
         userRepository.save(user);
 
         return user;
