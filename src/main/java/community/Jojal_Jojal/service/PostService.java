@@ -84,24 +84,17 @@ public class PostService {
     @Transactional
     public void updateHeart(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
-        Integer heart = post.getLike_count();
-        post.setLike_count(heart + 1);
+        post.postHeart();
 
         postRepository.save(post);
 
-        return;
     }
 
     /** 좋아요 삭제 */
     @Transactional
     public void deleteHeart(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
-        Integer heart = post.getLike_count();
-
-        if (heart == 0) {
-            return;
-        }
-        post.setLike_count(heart - 1);
+        post.deleteHeart();
         postRepository.save(post);
     }
 
