@@ -23,11 +23,6 @@ public class PostService {
     private final UserRepository userRepository;
     private final S3Uploader s3Uploader;
 
-    @Transactional
-    public Post createPost(Post post) {
-        return postRepository.save(post);
-    }
-
     /** 게시물 전체 조회 */
     public List<PostResponseDto.getAllPostsResponse> getAllPosts() {
         return postRepository.findAll()
@@ -77,7 +72,6 @@ public class PostService {
         //post.setPost_image_url(editDetails.getPost_image_url());
         postRepository.save(post);
 
-        return;
     }
 
     /** 좋아요 추가 */
