@@ -97,9 +97,12 @@ public class PostService {
     public void deleteHeart(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
         Integer heart = post.getLike_count();
+
+        if (heart == 0) {
+            return;
+        }
         post.setLike_count(heart - 1);
         postRepository.save(post);
-        return;
     }
 
 
