@@ -22,6 +22,6 @@ public class AuthController {
     @PostMapping("")
     @Operation(summary = "로그인")
     public ResponseEntity<AuthResponseDto.loginUser> loginUser (@RequestBody @Valid AuthRequestDto.loginUser loginDetail) {
-        return authService.loginUser(loginDetail);
+        return ResponseEntity.ok(authService.loginUser(loginDetail));
     }
 }

@@ -12,7 +12,6 @@ public class PostRequestDto {
       @NotBlank
       private String title;
 
-      private String post_image_url;
 
       @NotBlank
       private String post_content;
@@ -25,8 +24,6 @@ public class PostRequestDto {
     public static class editPost {
         @NotBlank
         private String title;
-
-        private String post_image_url;
 
         @NotBlank
         private String post_content;

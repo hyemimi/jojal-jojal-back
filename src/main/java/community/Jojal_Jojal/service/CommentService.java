@@ -36,13 +36,14 @@ public class CommentService {
                 .build();
         commentRepository.save(comment);
 
-        return;
-
     }
 
     /** 댓글 조회 */
     public List<CommentResponseDto.getComments> getComments (Long id) {
-        return commentRepository.findAll().stream().map(comment -> new CommentResponseDto.getComments(comment)).collect(Collectors.toList());
+        return commentRepository.findByPostId(id)
+                .stream()
+                .map(CommentResponseDto.getComments::new)
+                .collect(Collectors.toList());
     }
 
     /** 댓글 삭제 */
@@ -51,7 +52,6 @@ public class CommentService {
 
         commentRepository.delete(comment);
 
-        return;
     }
 
     /** 댓글 수정 */
@@ -60,7 +60,6 @@ public class CommentService {
         comment.setComment_content(commentDetail.getComment_content());
         commentRepository.save(comment);
 
-        return;
     }
 
 

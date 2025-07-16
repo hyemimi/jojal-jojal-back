@@ -45,6 +45,16 @@ public class Post {
         this.updated_at = LocalDateTime.now();
     }
 
+    public void postHeart() {
+        this.like_count += 1;
+    }
+
+    public void deleteHeart() {
+        if (this.like_count == 0) return;
+
+        this.like_count -= 1;
+    }
+
     // 양방향 관계 설정 (1:N)
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();

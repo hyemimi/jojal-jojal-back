@@ -17,7 +17,7 @@ public class UserRequestDto {
         @NotBlank(message = "닉네임 필수입니다.")
         private String nickname;
 
-        private String profile_image_url;
+
     }
 
     @Getter @Setter
@@ -33,7 +33,7 @@ public class UserRequestDto {
     @Getter @Setter
     public static class EditProfile {
         private String nickname;
-        private String profile_image_url;
+
     }
 
     @Getter @Setter
